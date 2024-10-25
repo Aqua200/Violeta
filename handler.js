@@ -110,9 +110,11 @@ export async function handler(chatUpdate) {
                 if (!('self' in settings)) settings.self = false
                 if (!('autoread' in settings)) settings.autoread = false
                 if (!('antiPrivate' in settings)) settings.antiPrivate = false
+                if (!('autoread2' in settings)) settings.autoread2 = false
             } else global.db.data.settings[this.user.jid] = {
                 self: false,
                 autoread: false,
+                autoread2: false,
                 antiPrivate: false,
                 status: 0
             }
