@@ -22,22 +22,6 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
       chat.bienvenida = isEnable
       break
 
-    case 'antiSpam':
-    case 'antispam':
-    case 'antispamosos':
-     isAll = true
-      if (!m.isGroup) {
-        if (!isOwner) {
-          global.dfail('group', m, conn)
-          throw false
-        }
-      } else if (!isAdmin) {
-        global.dfail('admin', m, conn)
-        throw false
-      }
-      bot.antiSpam = isEnable
-      break
-      
     case 'document':
     case 'documento':
     isUser = true
