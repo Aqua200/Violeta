@@ -27,6 +27,17 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
     isUser = true
     user.useDocument = isEnable
     break
+
+      case 'autoread': case 'autovisto':
+isAll = true
+if (!isROwner) {
+global.dfail('rowner', m, conn)
+throw false
+}
+bot.autoread2 = isEnable    
+global.opts['autoread'] = isEnable  
+break
+    
  
     case 'antilink':
       if (m.isGroup) {
