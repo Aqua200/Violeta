@@ -32,18 +32,19 @@ const defaultMenu = {
 
 ╭──⬣「 *Info User* 」⬣
 │  ≡◦ *🍭 Nombre ∙* %name
+│  ≡◦ *🍬 Dulces ∙* %limit
 │  ≡◦ *💫 XP ∙* %totalexp
 │  ≡◦ *🐢 Nivel ∙* %level
 ╰──⬣
 %readmore
 *꒷꒦꒷꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷*
 
-\t*L I S T A  -  D E  -  C O M A N D O S* 
+\t\t\t*L I S T A  -  M E N Ú S*
 `.trimStart(),
-    header: ' ☁「 MENU ✯ %category 」☁\n ',
-  body: '> 🍬>%cmd',
-  footer: '*─ׄ─ׅ─⭒─ׄ─ׄ─⭒─ׅ─ׄ─⭒─ׄ─ׄ─⭒─ׄ─ׄ─*\n',
-  after: `> ${dev}`,
+header: '╭──⬣「 *%category* 」⬣',
+body: '│  ≡◦ *%cmd*\n',
+footer: '╰──⬣\n',
+after: '',
 }
 
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
@@ -167,4 +168,4 @@ function clockString(ms) {
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-  }
+}
