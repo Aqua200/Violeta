@@ -4,47 +4,59 @@ import fetch from 'node-fetch'
 import { xpRange } from '../lib/levelling.js'
 
 let tags = {
-  'main': 'Info 📚',
-  'search': 'Busquedas 🔎',
-  'game': 'Juegos 🎮',
-  'serbot': 'Sub Bots 🤖',
-  'rpg': 'RPG 🌠',
-  'rg': 'Registro 📁',
-  'sticker': 'Stickers 🏞',
-  'img': 'Imágenes 📸',
-  'group': 'Grupos 👥',
-  'logo': 'Logo - maker 🎨',
-  'nable': 'On / Off 📴', 
-  'downloader': 'Descargas 📥',
-  'tools': 'Herramientas 🔧',
-  'fun': 'Diversión 🎲',
-  'nsfw': 'Nsfw 🔞', 
-  'owner': 'Creador 😺', 
-  'audio': 'Audios 🔉', 
-  'advanced': 'Avanzado 💠',
+  'main': 'INFO',
+  'buscador': 'BUSQUEDAS',
+  'fun': 'JUEGOS',
+  'serbot': 'SUB BOTS',
+  'rpg': 'RPG',
+  'rg': 'REGISTRO',
+  'xp': 'EXP',
+  'sticker': 'STICKERS',
+  'anime': 'ANIMES',
+  'database': 'DATABASE',
+  'fix': 'FIXMSGESPERA',
+  'grupo': 'GRUPOS',
+  'nable': 'ON / OFF', 
+  'descargas': 'DESCARGAS',
+  'tools': 'HERRAMIENTAS',
+  'info': 'INFORMACIÓN',
+  'owner': 'CREADOR', 
+  'audio': 'AUDIOS', 
+  'ai': 'AI',
+  'transformador': 'CONVERTIDORES',
 }
 
 const defaultMenu = {
-  before: `
-*꒷꒦꒷꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷*
+  before: `*─ׄ─ׅ─⭒─ׄ─ׄ─⭒─ׅ─ׄ─⭒─ׄ─ׄ─⭒─ׄ─ׄ─*
 
-“ hello *%name*, Cómo se encuentra el día de hoy? ”
+Hola *%name* soy *🩷𝑨𝒊𝒔𝒉𝒂 𝑮𝒓𝒆𝒚𝒓𝒂𝒕🩷*
 
-╭──⬣「 *Info User* 」⬣
-│  ≡◦ *🍭 Nombre ∙* %name
-│  ≡◦ *🍬 Dulces ∙* %limit
-│  ≡◦ *💫 XP ∙* %totalexp
-│  ≡◦ *🐢 Nivel ∙* %level
-╰──⬣
+┏━━━━━━━━ CREADOR
+┃  ✿︎ 𝑼𝒓𝒖𝒔❤️
+┗━━━━━━━━━━━━━━
 %readmore
-*꒷꒦꒷꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷*
+┏━━━━━━━━ INFO - BOT
+┃  ✿︎ Cliente: %name
+┃  ✿︎ Exp: %exp
+┃  ✿︎ Nivel: %level
+┗━━━━━━━━━━━━━━
+%readmore
+┏━━━━━━━━━ INFO - USER
+┃  ✿︎ Bot: 🩷𝑨𝒊𝒔𝒉𝒂 𝑮𝒓𝒆𝒚𝒓𝒂𝒕🩷
+┃  ✿︎ Modo Público
+┃  ✿︎ Baileys: Multi Device
+┃  ✿︎ Tiempo Activo: %muptime
+┃  ✿︎ Usuarios: %totalreg 
+┗━━━━━━━━━━━━━━
+%readmore
+*─ׄ─ׄ─⭒─ׄ─ׅ─ׄ⭒─ׄ─ׄ─⭒─ׄ─ׄ─⭒─ׄ─ׅ─*
 
-\t\t\t*L I S T A  -  M E N Ú S*
+\t*L I S T A  -  D E  -  C O M A N D O S* 
 `.trimStart(),
-header: '╭──⬣「 *%category* 」⬣',
-body: '│  ≡◦ *%cmd*\n',
-footer: '╰──⬣\n',
-after: '',
+    header: ' ☁「 MENU ✯ %category 」☁\n ',
+  body: '> 🍬>%cmd',
+  footer: '*─ׄ─ׅ─⭒─ׄ─ׄ─⭒─ׅ─ׄ─⭒─ׄ─ׄ─⭒─ׄ─ׄ─*\n',
+  after: `> ${dev}`,
 }
 
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
@@ -145,8 +157,13 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     
-    let pp = './storage/img/miniurl.jpg'
-    await conn.sendFile(m.chat, pp, 'thumbnail.jpg', text.trim(), m, null, rcanal)
+let urls = [
+"https://qu.ax/vnPMj.mp4",
+"https://qu.ax/vnPMj.mp4",
+];
+let gifUrl = urls[Math.floor(Math.random() * urls.length)];
+await conn.sendMessage(m.chat, {video: {url: gifUrl}, gifPlayback: true, caption: text.trim(), mentions: [m.sender]}, {quoted: m});
+
 
   } catch (e) {
     conn.reply(m.chat, 'Lo sentimos, el menú tiene un error.', m)
@@ -156,7 +173,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 
 handler.help = ['menu']
 handler.tags = ['main']
-handler.command = ['menu', 'help', 'menú'] 
+handler.command = ['menu', 'help','allmenu', 'menú'] 
 handler.register = true 
 export default handler
 
@@ -169,3 +186,33 @@ function clockString(ms) {
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
 }
+
+  var ase = new Date();
+  var hour = ase.getHours();
+switch(hour){
+  case 0: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
+  case 1: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 💤'; break;
+  case 2: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🦉'; break;
+  case 3: hour = 'Bᴜᴇɴᴏs Dɪᴀs ✨'; break;
+  case 4: hour = 'Bᴜᴇɴᴏs Dɪᴀs 💫'; break;
+  case 5: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌅'; break;
+  case 6: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌄'; break;
+  case 7: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌅'; break;
+  case 8: hour = 'Bᴜᴇɴᴏs Dɪᴀs 💫'; break;
+  case 9: hour = 'Bᴜᴇɴᴏs Dɪᴀs ✨'; break;
+  case 10: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌞'; break;
+  case 11: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌨'; break;
+  case 12: hour = 'Bᴜᴇɴᴏs Dɪᴀs ❄'; break;
+  case 13: hour = 'Bᴜᴇɴᴏs Dɪᴀs 🌤'; break;
+  case 14: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌇'; break;
+  case 15: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🥀'; break;
+  case 16: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌹'; break;
+  case 17: hour = 'Bᴜᴇɴᴀs Tᴀʀᴅᴇs 🌆'; break;
+  case 18: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
+  case 19: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌃'; break;
+  case 20: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌌'; break;
+  case 21: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌃'; break;
+  case 22: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌙'; break;
+  case 23: hour = 'Bᴜᴇɴᴀs Nᴏᴄʜᴇs 🌃'; break;
+}
+  var greeting = hour;
