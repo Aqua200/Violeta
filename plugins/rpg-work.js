@@ -1,34 +1,50 @@
-const cooldowns = {}
 
-let handler = async (m, { conn, usedPrefix, command }) => {
-   let user = global.db.data.users[m.sender]
-   let amount = Math.floor(Math.random() * (5 - 10) + 10) + 1
-   const tiempoEspera = 5 * 60 // 5 minutos
-  if (cooldowns[m.sender] && Date.now() - cooldowns[m.sender] < tiempoEspera * 1000) {
-    const tiempoRestante = segundosAHMS(Math.ceil((cooldowns[m.sender] + tiempoEspera * 1000 - Date.now()) / 1000))
-    m.reply(`🕜 Espera *${tiempoRestante}* para volver a Trabajar.`)
-    return
-  }
-   let work = works.getRandom()
-   user.limit += amount
-   await m.reply(`${work} *${amount} 🍬 Dulces.*`)
-   cooldowns[m.sender] = Date.now()
+let cooldowns = {}
+
+let handler = async (m, { conn, isPrems }) => {
+let user = global.db.data.users[m.sender]
+let tiempo = 5 * 60
+if (cooldowns[m.sender] && Date.now() - cooldowns[m.sender] < tiempo * 1000) {
+const tiempo2 = segundosAHMS(Math.ceil((cooldowns[m.sender] + tiempo * 1000 - Date.now()) / 1000))
+conn.reply(m.chat, `🚩 Espera ⏱️ *${tiempo2}* para volver a Trabajar.`, m, rcanal)
+return
+}
+let rsl = Math.floor(Math.random() * 5000)
+cooldowns[m.sender] = Date.now()
+await conn.reply(m.chat, `🚩 ${pickRandom(trabajo)} *${toNum(rsl)}* ( *${rsl}* ) XP 🍭.`, m, rcanal)
+user.exp += rsl
 }
 
-handler.help = ['work']
+handler.help = ['trabajar']
 handler.tags = ['rpg']
-handler.command = ['work', 'trabajar', 'w']
+handler.command = ['w','work', 'trabajar']
 handler.register = true 
 export default handler
 
+function toNum(number) {
+if (number >= 1000 && number < 1000000) {
+return (number / 1000).toFixed(1) + 'k'
+} else if (number >= 1000000) {
+return (number / 1000000).toFixed(1) + 'M'
+} else if (number <= -1000 && number > -1000000) {
+return (number / 1000).toFixed(1) + 'k'
+} else if (number <= -1000000) {
+return (number / 1000000).toFixed(1) + 'M'
+} else {
+return number.toString()}}
+
 function segundosAHMS(segundos) {
-  const minutos = Math.floor((segundos % 3600) / 60)
-  const segundosRestantes = segundos % 60
-  return `${minutos} minutos y ${segundosRestantes} segundos`
+let minutos = Math.floor((segundos % 3600) / 60)
+let segundosRestantes = segundos % 60
+return `${minutos} minutos y ${segundosRestantes} segundos`
+}
+
+function pickRandom(list) {
+return list[Math.floor(list.length * Math.random())];
 }
 
 // Thanks to FG98
-const works = [
+const trabajo = [
    "Trabajas como cortador de galletas y ganas",
    "Trabaja para una empresa militar privada, ganando",
    "Organiza un evento de cata de vinos y obtienes",
