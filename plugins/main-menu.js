@@ -40,12 +40,12 @@ const defaultMenu = {
 %readmore
 *꒷꒦꒷꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷*
 
-\t\t\t*L I S T A  -  M E N Ú S*
+\t*L I S T A  -  D E  -  C O M A N D O S* 
 `.trimStart(),
-header: '╭──⬣「 *%category* 」⬣',
-body: '│  ≡◦ *%cmd*\n',
-footer: '╰──⬣\n',
-after: '',
+    header: ' ☁「 MENU ✯ %category 」☁\n ',
+  body: '> 🍬>%cmd',
+  footer: '*─ׄ─ׅ─⭒─ׄ─ׄ─⭒─ׅ─ׄ─⭒─ׄ─ׄ─⭒─ׄ─ׄ─*\n',
+  after: `> ${dev}`,
 }
 
 let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
